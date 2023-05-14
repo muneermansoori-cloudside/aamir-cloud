@@ -1,0 +1,27 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: event-listener
+spec:
+  serviceAccountName: tekton-robot 
+  triggers:
+    - name: github-listener
+      interceptors:
+        - ref:
+            name: "github"
+          params:
+            - name: "secretRef"
+              value:
+                secretName: pipeline-secret
+                secretKey: secretToken
+            - name: "eventTypes"
+              value: ["pushes"]
+              #        - ref:
+              #  name: "cel"
+              #  params:
+              # - name: "filter"
+              # value: "body.action in ['opened', 'synchronize', 'reopened']"
+      bindings:
+        - ref: pipeline-binding
+      template:
+        ref: pipeline-template

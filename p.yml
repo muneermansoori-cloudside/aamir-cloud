@@ -1,0 +1,27 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: first-pipeline
+spec:
+  params:
+    - name: repo-url
+      type: string
+    - name: image-name
+      type: string
+    - name: image-tag
+      type: string
+      default: latest
+
+  tasks:
+    - name: hello
+      taskRef:
+        name: build-and-push
+ 
+      params:
+      - name: repo-url
+        value: $(params.repo-url)
+      - name: image-name
+        value: $(params.image-name)
+      - name: image-tag
+        value: $(params.image-tag
+

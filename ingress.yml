@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-resource
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /hooks
+            pathType: Exact
+            backend:
+              service:
+                name: el-new-eventlistener
+                port:
+                  number: 8080

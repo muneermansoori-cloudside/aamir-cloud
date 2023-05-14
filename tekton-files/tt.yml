@@ -1,0 +1,31 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: pipeline-template
+spec:
+  
+  params:
+    - name: repo-url
+      default: https://github.com/muneermansoori-cloudside/simple-dockerfile.git
+    - name: image-name
+      default: muneer16/testing-repo
+    - name: image-tag
+      default: latest
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1beta1
+    kind: PipelineRun
+    metadata:
+      generateName: hello-goodbye-run-
+    spec:
+      serviceAccountName: pipeline-account
+      pipelineRef:
+        name: first-pipeline
+      params:
+      - name: repo-url
+        value: $(tt.params.repo-url)
+      - name: image-name
+        value: $(tt.params.image-name)
+      - name: image-tag
+        value: $(tt.params.image-tag)
+
+

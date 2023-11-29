@@ -5,7 +5,7 @@ FROM ubuntu:latest
 RUN apt-get update && \
     apt-get install -y apache2 && \
     rm -rf /var/lib/apt/lists/*
-RUN echo "sec version  " > /var/www/html/index.html
+RUN echo "sec 2nd version  " > /var/www/html/index.html
 
 # Expose port 80 for incoming HTTP traffic
 EXPOSE 8080

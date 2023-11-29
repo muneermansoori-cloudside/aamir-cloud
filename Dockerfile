@@ -8,7 +8,7 @@ RUN apt-get update && \
 RUN echo "first version" > /var/www/html/index.html
 
 # Expose port 80 for incoming HTTP traffic
-EXPOSE 80
+EXPOSE 8080
 
 # Start Apache in the foreground when the container starts
 CMD ["apache2ctl", "-D", "FOREGROUND"]
